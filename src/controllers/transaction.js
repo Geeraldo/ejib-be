@@ -78,10 +78,27 @@ const getAllPemasukan = async (req, res) => {
         })
     }
 }
+const getAllPemasukanByGerejaId = async (req, res) => {
+    const {gerejaId} = req.params
+    try {
+        const [data] = await transactionModel.getAllPemasukanByGerejaId({gerejaId});
+
+        res.status(200).json({
+            message: res.message,
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error',
+            serverMessage: error,
+        })
+    }
+}
 module.exports = {
     getAllPengeluaranByGereja,
     getAllPengeluaran,
     resultPengeluaran,
     resultPengeluaranByGerejaId,
-    getAllPemasukan
+    getAllPemasukan,
+    getAllPemasukanByGerejaId
 }

@@ -13,5 +13,6 @@ router.get('/result/pengeluaran/:gerejaId', transactionController.resultPengelua
 
 // transaction - pemasukan
 router.get('/pemasukan', transactionController.getAllPemasukan);
+router.get('/pemasukan/:gerejaId', transactionController.getAllPemasukanByGerejaId);
 
 module.exports = router;

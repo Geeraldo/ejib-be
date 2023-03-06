@@ -49,8 +49,17 @@ const getAllPemasukan = () => {
 
     return dbPool.execute(SQLQuery);
 }
+const getAllPemasukanByGerejaId = ({gerejaId}) => {
+    const SQLQuery = `
+    SELECT
+	*
+FROM
+	setoranDetil
+WHERE
+	setoranDetil.gerejaId = ${gerejaId}`;
 
-
+    return dbPool.execute(SQLQuery);
+}
 
 
 
@@ -59,5 +68,5 @@ module.exports = {
     getAllPengeluaran,
     getAllPengeluaranByGereja,
     getResultPengeluaran,
-    getResultPengeluaranByGereja
+    getAllPemasukanByGerejaId
 }
