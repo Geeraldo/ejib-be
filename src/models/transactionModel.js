@@ -1,24 +1,5 @@
 const dbPool = require('../config/db');
 
-const getAllPemasukan = () => {
-    const SQLQuery = `SELECT
-	id_user,
-	nama_user,
-	username,
-	jabatan,
-	ROLE,
-	GerejaId,
-	foto,
-	IdGereja,
-	NamaGereja,
-	userId,
-	KeteranganGereja
-FROM
-	users
-	LEFT JOIN gereja ON users.GerejaId = gereja.IdGereja`;
-
-    return dbPool.execute(SQLQuery);
-}
 const getAllPengeluaranByGereja = ({id}) => {
     const SQLQuery = `
     SELECT
@@ -60,7 +41,14 @@ const getResultPengeluaran = () => {
     return dbPool.execute(SQLQuery);
 }
 
+const getAllPemasukan = () => {
+    const SQLQuery = `SELECT
+        *
+    FROM
+	setoranDetil`
 
+    return dbPool.execute(SQLQuery);
+}
 
 
 
