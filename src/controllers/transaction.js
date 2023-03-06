@@ -2,6 +2,8 @@ const transactionModel = require('../models/transactionModel.js');
 
 
 const getAllPengeluaranByGereja = async (req, res) => {
+    const {body} = req
+    console.log(object);
     try {
         const [data] = await transactionModel.getAllPengeluaranByGereja();
 

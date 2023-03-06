@@ -6,10 +6,8 @@ const router = express.Router();
 
 
 
-// READ - GET ALL GEREJA
-router.get('/id', transactionController.getAllPengeluaranByGereja);
-// READ - GET ALL pengeluaran
-router.get('/', transactionController.getAllPengeluaran);
+router.get('/pengeluaran/:id', transactionController.getAllPengeluaranByGereja);
+router.get('/pengeluaranAll', transactionController.getAllPengeluaran);
 router.get('/result', transactionController.resultPengeluaran);
 
 module.exports = router;

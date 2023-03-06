@@ -39,7 +39,7 @@ const getAllPengeluaran = () => {
 }
 const getResultPengeluaran = () => {
     const SQLQuery = `SELECT
-        SUM(pengeluaranJumlah)
+        SUM(pengeluaranJumlah) AS total_pengeluaran
     FROM
         pengeluaran`
 

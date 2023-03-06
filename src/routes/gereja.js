@@ -8,5 +8,4 @@ const router = express.Router();
 
 // READ - GET ALL GEREJA
 router.get('/', UserController.getAllUsers);
-
 module.exports = router;
