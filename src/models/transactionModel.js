@@ -19,13 +19,15 @@ FROM
 
     return dbPool.execute(SQLQuery);
 }
-const getAllPengeluaranByGereja = () => {
-    const SQLQuery = `SELECT
-        *
-    FROM
-        pengeluaran
-    WHERE
-        gerejaId = '1'`;
+const getAllPengeluaranByGereja = ({id}) => {
+    const SQLQuery = `
+    SELECT
+            *
+        FROM
+            pengeluaran
+            LEFT JOIN gereja ON gereja.IdGereja = pengeluaran.gerejaId
+        WHERE
+            userId = ${id}`;
 
     return dbPool.execute(SQLQuery);
 }
