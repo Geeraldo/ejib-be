@@ -19,11 +19,11 @@ const getAllPengeluaranByGereja = async (req, res) => {
 }
 const getAllPengeluaran = async (req, res) => {
     try {
-        const [data] = await transactionModel.getAllPengeluaranByGereja();
+        const [data] = await transactionModel.getAllPengeluaran();
 
         res.status(200).json({
             message: res.message,
-            data: data
+             data
         })
     } catch (error) {
         res.status(500).json({
@@ -38,7 +38,7 @@ const resultPengeluaran = async (req, res) => {
 
         res.status(200).json({
             message: res.message,
-            data: data
+            data
         })
     } catch (error) {
         res.status(500).json({
@@ -94,11 +94,28 @@ const getAllPemasukanByGerejaId = async (req, res) => {
         })
     }
 }
+const resultPemasukanByGerejaId = async (req, res) => {
+    const {gerejaId} = req.params;
+    try {
+        const [data] = await transactionModel.getResultPemasukanByGereja({gerejaId});
+
+        res.status(200).json({
+            message: res.message,
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error',
+            serverMessage: error,
+        })
+    }
+}
 module.exports = {
     getAllPengeluaranByGereja,
     getAllPengeluaran,
     resultPengeluaran,
     resultPengeluaranByGerejaId,
     getAllPemasukan,
-    getAllPemasukanByGerejaId
+    getAllPemasukanByGerejaId,
+    resultPemasukanByGerejaId
 }

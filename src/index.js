@@ -2,7 +2,9 @@ const express = require('express');
 const usersRoutes = require('./routes/gereja');
 const transactionRoutes = require('./routes/transaction');
 const app = express();
+const cors = require('cors');
 app.use(express.json());
+app.use(cors());
 
 
 // routes

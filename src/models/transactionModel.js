@@ -60,7 +60,17 @@ WHERE
 
     return dbPool.execute(SQLQuery);
 }
-
+const getResultPemasukanByGereja = ({gerejaId}) => {
+    const SQLQuery = `
+            SELECT
+            SUM(setoranDetil.jmlSetoranDetil) AS total_pemasukan
+        FROM
+            setoranDetil
+            LEFT JOIN gereja ON gereja.IdGereja = setoranDetil.gerejaId
+        WHERE
+            setoranDetil.gerejaId = ${gerejaId}`;
+    return dbPool.execute(SQLQuery);
+}
 
 
 module.exports = {
@@ -68,5 +78,6 @@ module.exports = {
     getAllPengeluaran,
     getAllPengeluaranByGereja,
     getResultPengeluaran,
-    getAllPemasukanByGerejaId
+    getAllPemasukanByGerejaId,
+    getResultPemasukanByGereja
 }
