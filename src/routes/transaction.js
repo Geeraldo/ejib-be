@@ -1,7 +1,6 @@
 const express = require('express');
 
 const transactionController = require('../controllers/transaction.js');
-const masterController = require('../controllers/master.js');
 
 const router = express.Router();
 
@@ -18,5 +17,6 @@ router.get('/pemasukan/:gerejaId', transactionController.getAllPemasukanByGereja
 router.get('/result/pemasukan/:gerejaId', transactionController.resultPemasukanByGerejaId);
 
 
-
+// result
 module.exports = router;
+router.get('/dashboard/result', transactionController.getPendapatanGereja);

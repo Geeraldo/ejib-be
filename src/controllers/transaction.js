@@ -110,6 +110,24 @@ const resultPemasukanByGerejaId = async (req, res) => {
         })
     }
 }
+const getPendapatanGereja = async (req, res) => {
+    try {
+        const [pemasukanImanuelBahu] = await transactionModel.getResultPemasukanGerejaImanuelbahu();
+        console.log(pemasukanImanuelBahu);
+
+        // res.status(200).json({
+        //     message: res.message,
+        //     data: {
+        //         pemasukanImanuelBahu : pemasukanImanuelBahu
+        //     }
+        // })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error',
+            serverMessage: error,
+        })
+    }
+}
 module.exports = {
     getAllPengeluaranByGereja,
     getAllPengeluaran,
@@ -117,5 +135,6 @@ module.exports = {
     resultPengeluaranByGerejaId,
     getAllPemasukan,
     getAllPemasukanByGerejaId,
-    resultPemasukanByGerejaId
+    resultPemasukanByGerejaId,
+    getPendapatanGereja
 }
