@@ -15,7 +15,8 @@ const getAllUsers = () => {
 	KeteranganGereja
 FROM
 	users
-	LEFT JOIN gereja ON users.GerejaId = gereja.IdGereja`;
+	LEFT JOIN gereja ON users.GerejaId = gereja.IdGereja
+	WHERE jabatan = "Gereja"`;
 
     return dbPool.execute(SQLQuery);
 }
