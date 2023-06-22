@@ -132,6 +132,24 @@ const getPendapatanGereja = async (req, res) => {
         // // })
 
     }
+    //  recent pengeluaran
+    const getRecentTransaction = async (req, res) => {
+        try {
+            const [data] = await transactionModel.getRecentTransaction();
+
+            res.status(200).json({
+                message: res.message,
+                data: data
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: 'Server Error',
+                serverMessage: error,
+            })
+        }
+    }
+
+
 module.exports = {
     getAllPengeluaranByGereja,
     getAllPengeluaran,
@@ -140,5 +158,6 @@ module.exports = {
     getAllPemasukan,
     getAllPemasukanByGerejaId,
     resultPemasukanByGerejaId,
-    getPendapatanGereja
+    getPendapatanGereja,
+    getRecentTransaction
 }

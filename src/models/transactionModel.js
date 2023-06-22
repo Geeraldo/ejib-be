@@ -89,6 +89,13 @@ FROM
     where gerejaId = '1'`;
     return dbPool.execute(SQLQuery);
 }
+const getRecentTransaction = () => {
+    const SQLQuery = `SELECT pengeluaranId, DATE_FORMAT(pengeluaran.pengeluaranTanggal, '%Y-%m-%d') as tanggal, pengeluaranNama, pengeluaranKeterangan, pengeluaranJumlah, gereja.IdGereja, gereja.KeteranganGereja
+    FROM pengeluaran
+    LEFT JOIN gereja on pengeluaran.gerejaId = gereja.IdGereja
+    WHERE DATE_FORMAT(pengeluaran.pengeluaranTanggal, '%Y-%m-%d') = CURDATE()`;
+    return dbPool.execute(SQLQuery);
+}
 
 
 
@@ -101,5 +108,6 @@ module.exports = {
     getAllPemasukanByGerejaId,
     getResultPemasukanByGereja,
     getResultPemasukanGerejaImanuelbahu,
-    getResultPengeluaranGerejaImanuelbahu
+    getResultPengeluaranGerejaImanuelbahu,
+    getRecentTransaction
 }

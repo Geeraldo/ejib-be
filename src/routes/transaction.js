@@ -20,3 +20,7 @@ router.get('/result/pemasukan/:gerejaId', transactionController.resultPemasukanB
 // result
 module.exports = router;
 router.get('/dashboard/result', transactionController.getPendapatanGereja);
+
+
+// recent pengeluaran
+router.get('/recent/pengeluaran', transactionController.getRecentTransaction);
