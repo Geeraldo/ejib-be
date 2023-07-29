@@ -12,18 +12,6 @@ const getAllPengeluaranByGereja = ({id}) => {
 
     return dbPool.execute(SQLQuery);
 }
-const getResultPengeluaranByGereja = ({gerejaId}) => {
-    const SQLQuery = `
-            SELECT
-            SUM(pengeluaran.pengeluaranJumlah) AS total_pengeluaran
-        FROM
-            pengeluaran
-            LEFT JOIN gereja ON gereja.IdGereja = pengeluaran.gerejaId
-        WHERE
-            pengeluaran.gerejaId = ${gerejaId}`;
-
-    return dbPool.execute(SQLQuery);
-}
 const getAllPengeluaran = () => {
     const SQLQuery = `SELECT
         *
@@ -75,6 +63,19 @@ const getResultPemasukanByGereja = ({gerejaId}) => {
         gerejaId`;
     return dbPool.execute(SQLQuery);
 }
+const getResultPengeluaranByGereja = ({gerejaId}) => {
+    const SQLQuery = `
+    SELECT
+        gerejaId,
+            SUM(pengeluaran.pengeluaranJumlah) AS total_pengeluaran,
+            gereja.KeteranganGereja
+        FROM
+            pengeluaran
+            LEFT JOIN gereja ON gereja.IdGereja = pengeluaran.gerejaId
+        WHERE
+            pengeluaran.gerejaId = ${gerejaId}`;
+    return dbPool.execute(SQLQuery);
+}
 const getResultPengeluaranGerejaImanuelbahu = () => {
     const pengeluaran = `
     SELECT
@@ -122,5 +123,5 @@ module.exports = {
     getResultPemasukanGerejaImanuelbahu,
     getResultPengeluaranGerejaImanuelbahu,
     getRecentTransaction,
-    getAllPengeluaranByGereja
+    getResultPengeluaranByGereja
 }

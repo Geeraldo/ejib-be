@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/pengeluaran/:id', transactionController.getAllPengeluaranByGereja);
 router.get('/pengeluaran', transactionController.getAllPengeluaran);
 router.get('/result', transactionController.resultPengeluaran);
-router.get('/result/pengeluaran/:gerejaId', transactionController.resultPengeluaranByGerejaId);
+router.get('/result/pengeluaran/:gerejaId', transactionController.PengeluaranGerejaId);
 
 // transaction - pemasukan
 router.get('/pemasukan', transactionController.getAllPemasukan);
