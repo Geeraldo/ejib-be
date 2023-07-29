@@ -48,6 +48,7 @@ WHERE
 
     return dbPool.execute(SQLQuery);
 }
+// fix pemasukan
 const getResultPemasukanByGereja = ({gerejaId}) => {
     const SQLQuery = `
     SELECT
@@ -63,6 +64,7 @@ const getResultPemasukanByGereja = ({gerejaId}) => {
         gerejaId`;
     return dbPool.execute(SQLQuery);
 }
+// fix pengeluaran
 const getResultPengeluaranByGereja = ({gerejaId}) => {
     const SQLQuery = `
     SELECT
