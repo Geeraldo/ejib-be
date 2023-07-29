@@ -94,7 +94,7 @@ const getAllPemasukanByGerejaId = async (req, res) => {
         })
     }
 }
-const resultPemasukanByGerejaId = async (req, res) => {
+const PemasukanGerejaId = async (req, res) => {
     const {gerejaId} = req.params;
     try {
         const [data] = await transactionModel.getResultPemasukanByGereja({gerejaId});
@@ -157,7 +157,7 @@ module.exports = {
     resultPengeluaranByGerejaId,
     getAllPemasukan,
     getAllPemasukanByGerejaId,
-    resultPemasukanByGerejaId,
+    PemasukanGerejaId,
     getPendapatanGereja,
     getRecentTransaction
 }

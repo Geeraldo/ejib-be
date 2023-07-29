@@ -14,7 +14,7 @@ router.get('/result/pengeluaran/:gerejaId', transactionController.resultPengelua
 // transaction - pemasukan
 router.get('/pemasukan', transactionController.getAllPemasukan);
 router.get('/pemasukan/:gerejaId', transactionController.getAllPemasukanByGerejaId);
-router.get('/result/pemasukan/:gerejaId', transactionController.resultPemasukanByGerejaId);
+router.get('/result/pemasukan/:gerejaId', transactionController.PemasukanGerejaId);
 
 
 // result

@@ -27,3 +27,4 @@ FROM
 module.exports = {
     getAllUsers,
 }
+1

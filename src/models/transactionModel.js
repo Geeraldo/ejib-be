@@ -62,13 +62,17 @@ WHERE
 }
 const getResultPemasukanByGereja = ({gerejaId}) => {
     const SQLQuery = `
-            SELECT
-            SUM(setoranDetil.jmlSetoranDetil) AS total_pemasukan
-        FROM
-            setoranDetil
-            LEFT JOIN gereja ON gereja.IdGereja = setoranDetil.gerejaId
-        WHERE
-            setoranDetil.gerejaId = ${gerejaId}`;
+    SELECT
+        gerejaId,
+        (SUM(jmlKolom) + SUM(jmlPKB) + SUM(jmlWKI) + + SUM(jmlPemuda) + SUM(jmlRemaja) + SUM(jmlPemuda) + SUM(jmlLainnya1) + SUM(jmlLainnya2) + SUM(jmlLainnya3)) AS total,
+        gereja.KeteranganGereja
+    FROM
+        setoranDetil
+        LEFT JOIN gereja ON gerejaId = gereja.IdGereja
+    WHERE
+        setoranDetil.gerejaId = ${gerejaId}
+    GROUP BY
+        gerejaId`;
     return dbPool.execute(SQLQuery);
 }
 const getResultPengeluaranGerejaImanuelbahu = () => {
@@ -96,6 +100,14 @@ const getRecentTransaction = () => {
     WHERE DATE_FORMAT(pengeluaran.pengeluaranTanggal, '%Y-%m-%d') = CURDATE()`;
     return dbPool.execute(SQLQuery);
 }
+const getRecentTransactionPemasukan = () => {
+    const SQLQuery = `SELECT pengeluaranId, DATE_FORMAT(pengeluaran.pengeluaranTanggal, '%Y-%m-%d') as tanggal, pengeluaranNama, pengeluaranKeterangan, pengeluaranJumlah, gereja.IdGereja, gereja.KeteranganGereja
+    FROM pengeluaran
+    LEFT JOIN gereja on pengeluaran.gerejaId = gereja.IdGereja
+    WHERE DATE_FORMAT(pengeluaran.pengeluaranTanggal, '%Y-%m-%d') = CURDATE()`;
+    return dbPool.execute(SQLQuery);
+}
+
 
 
 
@@ -109,5 +121,6 @@ module.exports = {
     getResultPemasukanByGereja,
     getResultPemasukanGerejaImanuelbahu,
     getResultPengeluaranGerejaImanuelbahu,
-    getRecentTransaction
+    getRecentTransaction,
+    getAllPengeluaranByGereja
 }
