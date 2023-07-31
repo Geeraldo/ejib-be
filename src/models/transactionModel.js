@@ -70,9 +70,7 @@ const getResultPengeluaranByGereja = ({gerejaId}) => {
     SELECT
         gerejaId,
             SUM(pengeluaran.pengeluaranJumlah) AS total_pengeluaran,
-            gereja.KeteranganGereja,
-
-
+            gereja.KeteranganGereja
         FROM
             pengeluaran
             LEFT JOIN gereja ON gereja.IdGereja = pengeluaran.gerejaId
@@ -119,6 +117,47 @@ const getRecentTransactionPemasukan = () => {
   `;
     return dbPool.execute(SQLQuery);
 }
+// chart model
+const getChartPengeluaran = ({gerejaId}) => {
+    const SQLQuery = `SELECT
+	date_format(pengeluaranTanggal, '%M') AS Bulan,
+	sum(pengeluaranJumlah) AS total,
+	gerejaId,
+	gereja.KeteranganGereja
+FROM
+	pengeluaran
+	LEFT JOIN gereja ON gerejaId = gereja.IdGereja
+WHERE
+	gerejaId = ${gerejaId}
+GROUP BY
+	year(pengeluaranTanggal),
+	month(pengeluaranTanggal)
+ORDER BY
+	year(pengeluaranTanggal),
+	month(pengeluaranTanggal)`;
+    return dbPool.execute(SQLQuery);
+}
+const getChartPemasukan = ({gerejaId}) => {
+    const SQLQuery = `SELECT
+	date_format(setoranDetil.setoranDetiltanggl, '%M') AS Bulan,
+	(SUM(jmlKolom) + SUM(jmlPKB) + SUM(jmlWKI) + + SUM(jmlPemuda) + SUM(jmlRemaja) + SUM(jmlPemuda) + SUM(jmlLainnya1) + SUM(jmlLainnya2) + SUM(jmlLainnya3)) AS total,
+	gereja.KeteranganGereja,
+	gerejaId,
+	gereja.KeteranganGereja
+FROM
+	setoranDetil
+	LEFT JOIN gereja ON gerejaId = gereja.IdGereja
+WHERE
+gerejaId = ${gerejaId}
+GROUP BY
+	year(setoranDetiltanggl),
+	month(setoranDetiltanggl)
+ORDER BY
+	year(setoranDetiltanggl),
+	month(setoranDetiltanggl)`;
+    return dbPool.execute(SQLQuery);
+}
+
 
 
 
@@ -135,5 +174,7 @@ module.exports = {
     getResultPengeluaranGerejaImanuelbahu,
     getRecentTransaction,
     getResultPengeluaranByGereja,
-    getRecentTransactionPemasukan
+    getRecentTransactionPemasukan,
+    getChartPengeluaran,
+    getChartPemasukan
 }

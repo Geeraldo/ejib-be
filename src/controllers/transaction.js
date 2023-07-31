@@ -165,10 +165,43 @@ const getPendapatanGereja = async (req, res) => {
             })
         }
     }
-       //  recent pemasukan
+       //  recent pengeluaran
     const getRecentTransactionPemasukan = async (req, res) => {
         try {
-            const [data] = await transactionModel.getRecentTransactionPemasukan();
+            const [data] = await transactionModel.getRecentTransaction();
+
+            res.status(200).json({
+                message: res.message,
+                data: data
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: 'Server Error',
+                serverMessage: error,
+            })
+        }
+    }
+    // chart code
+    const chartPengeluaran = async (req, res) => {
+        const {gerejaId} = req.params;
+        try {
+            const [data] = await transactionModel.getChartPengeluaran({gerejaId});
+
+            res.status(200).json({
+                message: res.message,
+                data: data
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: 'Server Error',
+                serverMessage: error,
+            })
+        }
+    }
+    const chartPemasukan = async (req, res) => {
+        const {gerejaId} = req.params;
+        try {
+            const [data] = await transactionModel.getChartPemasukan({gerejaId});
 
             res.status(200).json({
                 message: res.message,
@@ -184,6 +217,7 @@ const getPendapatanGereja = async (req, res) => {
 
 
 
+
 module.exports = {
     getAllPengeluaranByGereja,
     getAllPengeluaran,
@@ -195,5 +229,7 @@ module.exports = {
     getPendapatanGereja,
     getRecentTransaction,
     PengeluaranGerejaId,
-    getRecentTransactionPemasukan
+    getRecentTransactionPemasukan,
+    chartPengeluaran,
+    chartPemasukan
 }
