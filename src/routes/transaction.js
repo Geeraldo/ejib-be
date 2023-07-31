@@ -24,3 +24,4 @@ router.get('/dashboard/result', transactionController.getPendapatanGereja);
 
 // recent pengeluaran
 router.get('/recent/pengeluaran', transactionController.getRecentTransaction);
+router.get('/recent/pemasukan', transactionController.getRecentTransactionPemasukan);

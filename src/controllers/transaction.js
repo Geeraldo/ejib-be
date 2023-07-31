@@ -165,6 +165,23 @@ const getPendapatanGereja = async (req, res) => {
             })
         }
     }
+       //  recent pemasukan
+    const getRecentTransactionPemasukan = async (req, res) => {
+        try {
+            const [data] = await transactionModel.getRecentTransactionPemasukan();
+
+            res.status(200).json({
+                message: res.message,
+                data: data
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: 'Server Error',
+                serverMessage: error,
+            })
+        }
+    }
+
 
 
 module.exports = {
@@ -177,5 +194,6 @@ module.exports = {
     PemasukanGerejaId,
     getPendapatanGereja,
     getRecentTransaction,
-    PengeluaranGerejaId
+    PengeluaranGerejaId,
+    getRecentTransactionPemasukan
 }
